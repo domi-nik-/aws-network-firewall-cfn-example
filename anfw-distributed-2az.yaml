@@ -36,7 +36,6 @@ Parameters:
 
   LatestAmiId:
     Description: Latest EC2 AMI from Systems Manager Parameter Store
-    Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
     Default: '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
       
 Resources:
@@ -188,78 +187,6 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-firewall-subnet-2"
-
-# AWS PrivateLink interface endpoint for services:
-  SpokeVpcAEndpointSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-        GroupDescription: Allow instances to get to SSM Systems Manager
-        VpcId: !Ref SpokeVpcA
-        SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 443
-          ToPort: 443
-          CidrIp: 10.1.0.0/16
-        Tags:
-          - Key: Name
-            Value: !Sub "${AWS::StackName}-vpce-sg-1"          
-
-  SpokeVpcASSMEndpoint:
-    Type: AWS::EC2::VPCEndpoint
-    Properties: 
-        PrivateDnsEnabled: true
-        SecurityGroupIds: 
-          - !Ref SpokeVpcAEndpointSecurityGroup
-        ServiceName: !Sub "com.amazonaws.${AWS::Region}.ssm"
-        SubnetIds: 
-          - !Ref PublicSubnet1
-          - !Ref PublicSubnet2
-        VpcEndpointType: Interface
-        VpcId: !Ref SpokeVpcA
-
-  SpokeVpcAEC2MessagesEndpoint:
-    Type: AWS::EC2::VPCEndpoint
-    Properties: 
-        PrivateDnsEnabled: true
-        SecurityGroupIds: 
-          - !Ref SpokeVpcAEndpointSecurityGroup
-        ServiceName: !Sub "com.amazonaws.${AWS::Region}.ec2messages"
-        SubnetIds: 
-          - !Ref PublicSubnet1
-          - !Ref PublicSubnet2
-        VpcEndpointType: Interface
-        VpcId: !Ref SpokeVpcA
-
-  SpokeVpcASSMMessagesEndpoint:
-    Type: AWS::EC2::VPCEndpoint
-    Properties: 
-        PrivateDnsEnabled: true
-        SecurityGroupIds: 
-          - !Ref SpokeVpcAEndpointSecurityGroup
-        ServiceName: !Sub "com.amazonaws.${AWS::Region}.ssmmessages"
-        SubnetIds: 
-          - !Ref PublicSubnet1
-          - !Ref PublicSubnet2
-        VpcEndpointType: Interface
-        VpcId: !Ref SpokeVpcA
-
-# SSM Role:
-  SubnetRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Sub "${AWS::StackName}-subnet-role"
-      Path: "/"
-      ManagedPolicyArns:
-        - "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service:
-                - ec2.amazonaws.com
-            Action:
-              - sts:AssumeRole
 
   SubnetInstanceProfile:
     Type: AWS::IAM::InstanceProfile
