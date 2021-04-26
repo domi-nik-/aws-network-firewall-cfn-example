@@ -289,22 +289,6 @@ Resources:
       Az2: !Ref AvailabilityZone2Selection
       FwArn: !Ref SpokeVpcAFirewall
 
-# Testing Security Group:
-  SubnetSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: "ICMP acess from 10.0.0.0/8"
-      GroupName: !Sub "${AWS::StackName}-test-instance-sec-group"
-      VpcId: !Ref SpokeVpcA
-      SecurityGroupIngress:
-        - IpProtocol: icmp
-          CidrIp: 10.0.0.0/8
-          FromPort: "-1"
-          ToPort: "-1"
-      Tags:
-        - Key: Name
-          Value: !Sub "${AWS::StackName}-test-sg-1"                
-
 # AWS Network Firewall:
   SpokeVpcAFirewall:
     Type: AWS::NetworkFirewall::Firewall
