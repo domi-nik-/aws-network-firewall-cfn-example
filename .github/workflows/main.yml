@@ -22,6 +22,8 @@ jobs:
   deploy:
     name: Deploy stack to AWS
     runs-on: ubuntu-latest
+    env:
+      aws-region: eu-west-1
     outputs:
       env-name: ${{ steps.env-name.outputs.environment }}
     steps:
