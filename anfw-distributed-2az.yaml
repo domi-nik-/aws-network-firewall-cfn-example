@@ -189,13 +189,6 @@ Resources:
         - Key: Name
           Value: !Sub "${AWS::StackName}-firewall-subnet-2"
 
-  SubnetInstanceProfile:
-    Type: AWS::IAM::InstanceProfile
-    Properties:
-      Path: "/"
-      Roles:
-        - !Ref SubnetRole
-
 # Fn::GetAtt for Firewall do not return VPCE Id in ordered format.
 # For more details refer to: https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-networkfirewall/issues/15
 # Until the bug is fixed we have to rely on custom resource to retrieve AZ specific VPCE Id.
