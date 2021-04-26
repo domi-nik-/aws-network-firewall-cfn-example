@@ -305,33 +305,6 @@ Resources:
         - Key: Name
           Value: !Sub "${AWS::StackName}-test-sg-1"                
 
-# Test Instances:
-  TestInstance1:
-    Type: 'AWS::EC2::Instance'
-    Properties:
-      ImageId: !Ref LatestAmiId
-      SubnetId: !Ref PrivateSubnet1
-      InstanceType: t2.micro
-      SecurityGroupIds:
-        - !Ref SubnetSecurityGroup
-      IamInstanceProfile: !Ref SubnetInstanceProfile
-      Tags:
-        - Key: Name
-          Value: !Sub "${AWS::StackName}-test-instance-1"
-
-  TestInstance2:
-    Type: 'AWS::EC2::Instance'
-    Properties:
-      ImageId: !Ref LatestAmiId
-      SubnetId: !Ref PrivateSubnet2
-      InstanceType: t2.micro
-      SecurityGroupIds:
-        - !Ref SubnetSecurityGroup
-      IamInstanceProfile: !Ref SubnetInstanceProfile
-      Tags:
-        - Key: Name
-          Value: !Sub "${AWS::StackName}-test-instance-2"
-
 # AWS Network Firewall:
   SpokeVpcAFirewall:
     Type: AWS::NetworkFirewall::Firewall
