@@ -345,6 +345,7 @@ Resources:
               - TLS_SNI
             Targets: 
               - ".amazon.com"
+              - ".eaby.de"
             GeneratedRulesType: "ALLOWLIST"
       Tags:
         - Key: Name
