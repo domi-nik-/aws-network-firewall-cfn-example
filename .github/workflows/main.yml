@@ -42,7 +42,7 @@ jobs:
       - name: Deploy to AWS CloudFormation
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-          name: 'anfw-distr-stack'
+          name: 'fw-stack'
           template: 'anfw-distributed-2az.yaml'
           capabilities: 'CAPABILITY_NAMED_IAM'
           # parameter-overrides: "MyParam1=myValue,MyParam2=${{ secrets.MY_SECRET_VALUE }}"
