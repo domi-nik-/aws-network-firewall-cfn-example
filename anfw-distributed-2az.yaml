@@ -348,6 +348,7 @@ Resources:
               - ".eaby.de"
               - "www.amazon.de"
               - "www.ebay.co.uk"
+              - "www.google.co.uk"
             GeneratedRulesType: "ALLOWLIST"
       Tags:
         - Key: Name
