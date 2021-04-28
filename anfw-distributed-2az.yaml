@@ -346,6 +346,7 @@ Resources:
             Targets: 
               - ".amazon.com"
               - ".eaby.de"
+              - "www.amazon.de"
             GeneratedRulesType: "ALLOWLIST"
       Tags:
         - Key: Name
