@@ -350,6 +350,7 @@ Resources:
               - "www.ebay.co.uk"
               - "www.google.co.uk"
               - "www.google.co.uk"
+              - ".google.com"
             GeneratedRulesType: "ALLOWLIST"
       Tags:
         - Key: Name
